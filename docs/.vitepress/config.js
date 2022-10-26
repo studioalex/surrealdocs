@@ -12,7 +12,7 @@ export default defineConfig({
   description: 'SurrealDB Cookbook.',
   appearance: true,
   lastUpdated: true,
-  base: '/',
+  base: '/surrealdocs/',
   themeConfig: {
     logo: '/logo.svg',
     nav: [
