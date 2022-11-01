@@ -2,46 +2,24 @@ import { defineConfig } from 'vitepress'
 import { createWriteStream } from 'node:fs'
 import { resolve } from 'node:path'
 import { SitemapStream } from 'sitemap'
-import { version } from '../../package.json'
 
 const links = []
 
 export default defineConfig({
   lang: 'en-US',
-  title: 'SurrealDB Cookbook',
-  description: 'SurrealDB Cookbook.',
+  title: 'SurrealDB Tutorials',
+  description: 'SurrealDB Tutorials.',
   appearance: true,
   lastUpdated: true,
   base: '/surrealdocs/',
   themeConfig: {
     logo: '/logo.svg',
     nav: [
-      { text: 'Guide', link: '/guide/getting_started' },
-      { text: 'Elements', link: '/elements/' },
-      { text: 'Demo App', link: 'https://hora.studioalex.tech/demo/' },
-      { text: 'Changelog', link: 'https://github.com/studioalex/hora/blob/main/README.md' },
-      { text: 'GitHub', link: 'https://github.com/studioalex/hora' },
-      { text: version }
+      { text: 'Tutorials', link: '/tutorials/getting_started' },
+      { text: 'GitHub', link: 'https://github.com/studioalex/surrealdocs' }
     ],
     sidebar: {
-      '/guide/': [{
-        text: 'Guide',
-        items: [
-          { text: 'Getting Started', link: '/guide/getting_started' },
-          { text: 'Items and Fields', link: '/guide/data_fields' },
-          { text: 'Static header and fields', link: '/guide/static' },
-          { text: 'Custom Data Rendering', link: '/guide/custom_data_rendering' },
-          { text: 'Sorting', link: '/guide/sorting' },
-          { text: 'Field Settings', link: '/guide/settings' },
-          { text: 'Selection support', link: '/guide/selection_support' },
-          { text: 'Details support', link: '/guide/details_support' },
-          { text: 'Headline', link: '/guide/headline' },
-          { text: 'Loading State', link: '/guide/loading_state' },
-          { text: 'No Data State', link: '/guide/no_data_state' },
-          { text: 'Styling options', link: '/guide/styling' },
-          { text: 'Component reference', link: '/guide/definition_reference' },
-        ]
-      }]
+      '/tutorials/': sidebarTutorials()
     },
     footer: {
       message: 'Released under the MIT License.',
@@ -57,10 +35,23 @@ export default defineConfig({
       })
   },
   buildEnd: ({ outDir }) => {
-    const sitemap = new SitemapStream({ hostname: 'https://hora.studioalex.tech/' })
+    const sitemap = new SitemapStream({ hostname: 'https://studioalex.github.io/surrealdocs/' })
     const writeStream = createWriteStream(resolve(outDir, 'sitemap.xml'))
     sitemap.pipe(writeStream)
     links.forEach((link) => sitemap.write(link))
     sitemap.end()
   }
 })
+
+function sidebarTutorials() {
+  return [
+    {
+      text: 'Tutorials',
+      items: [
+        { text: 'Welcome', link: '/tutorials/getting_started' },
+        { text: 'How to use signin and signup', link: '/tutorials/signin_and_signup' },
+        { text: 'How Scopes works', link: '/tutorials/scopes' },
+      ]
+    }
+  ]
+}
