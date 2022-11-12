@@ -51,6 +51,7 @@ function sidebarTutorials() {
         { text: 'Welcome', link: '/tutorials/getting_started' },
         { text: 'How to use signin and signup', link: '/tutorials/signin_and_signup' },
         { text: 'How Scopes works', link: '/tutorials/scopes' },
+        { text: 'Storage', link: '/tutorials/storage' },
       ]
     }
   ]
